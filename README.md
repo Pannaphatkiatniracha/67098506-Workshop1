@@ -1,5 +1,5 @@
 # SALA Minimalist E-Commerce Clothing Platform
-## เอกสารข้อกำหนดโปรเจกต์ (Project Specification Document) ฉบับละเอียด
+## เอกสารข้อกำหนดโปรเจกต์ (Project Specification Document) 
 
 ---
 
