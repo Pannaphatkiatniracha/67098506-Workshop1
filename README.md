@@ -82,7 +82,7 @@
 - ระบบแจ้งเตือน (Notification) พื้นฐาน เช่น อีเมลยืนยันคำสั่งซื้อ
 
 
-### 4.2 สิ่งที่อยู่นอกขอบเขต (Out of Scope) — เฟสแรก
+### 4.2 สิ่งที่อยู่นอกขอบเขต (Out of Scope)
 - ระบบแนะนำสินค้าด้วย AI/Machine Learning (Recommendation Engine)
 - แอปพลิเคชันมือถือแบบ Native (iOS/Android)
 - ระบบ Live Chat แบบ Real-time กับ Support
