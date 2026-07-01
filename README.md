@@ -1,4 +1,4 @@
-# SALA — Minimalist E-Commerce Clothing Platform
+# SALA Minimalist E-Commerce Clothing Platform
 ## เอกสารข้อกำหนดโปรเจกต์ (Project Specification Document) ฉบับละเอียด
 
 ---
