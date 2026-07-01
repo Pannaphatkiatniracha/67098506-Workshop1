@@ -181,21 +181,29 @@
 
 ## 8. เทคโนโลยีที่ใช้ (Technology Stack) — ข้อเสนอแนะ
 
-| ส่วนประกอบ | เทคโนโลยีที่แนะนำ | เหตุผล |
-|---|---|---|
-| Frontend | React.js (Next.js) + TailwindCSS | รองรับ SSR เพื่อความเร็ว, เหมาะกับดีไซน์มินิมอล, Responsive ง่าย |
-| Backend | Node.js (NestJS) หรือ Go (Fiber) | รองรับสถาปัตยกรรมแบบแยก Service, Performance สูง |
-| Database (หลัก) | PostgreSQL | รองรับ Transaction ที่ซับซ้อน เช่น Order/Payment ได้ดี มี ACID |
-| Cache | Redis | เพิ่มความเร็วในการค้นหาสินค้าและจัดการ Session/Cart |
-| Search Engine | Elasticsearch หรือ Typesense | รองรับการค้นหาสินค้าที่แม่นยำและรวดเร็ว |
-| Authentication | JWT + OAuth 2.0 | ปลอดภัยและรองรับ Login ผ่าน Social Account |
-| Payment Gateway | Omise / 2C2P / Stripe | รองรับการชำระเงินในประเทศไทย |
-| File/Image Storage | AWS S3 หรือ Cloudflare R2 | จัดเก็บรูปภาพสินค้าได้อย่างมีประสิทธิภาพ |
-| Message Queue | RabbitMQ หรือ Kafka | รองรับการสื่อสารระหว่าง Service (Order, Ticket, Notification) |
-| Notification | AWS SES / SendGrid | ส่งอีเมลแจ้งเตือนลูกค้า |
-| Hosting/Infra | Docker + Kubernetes บน AWS/GCP | รองรับการขยายตัว (Scalability) |
-| CI/CD | GitHub Actions | Automate การ Build/Test/Deploy |
-| Monitoring | Grafana + Prometheus | ติดตามสถานะระบบและ Performance |
+8. เทคโนโลยีที่ใช้ (Technology Stack)
+
+โปรเจกต์ SALA เลือกใช้เทคโนโลยีที่มีความเสถียร เป็นที่นิยมในวงกว้าง และมีเอกสาร/Community รองรับสูง เพื่อให้ทีมพัฒนาสามารถทำงานร่วมกันได้อย่างมีประสิทธิภาพ และลดความเสี่ยงในการดูแลรักษาระบบในระยะยาว
+
+8.1 Frontend
+
+เทคโนโลยีบทบาทในระบบReact.js / Next.jsเฟรมเวิร์กหลักในการสร้าง User Interface ที่ตอบสนองรวดเร็ว รองรับการทำ Server-Side Rendering (SSR) เพื่อให้หน้าเว็บโหลดไวและเป็นมิตรกับ SEOTailwind CSS + Bootstrapผสมผสานจุดเด่นของทั้งสองฝั่งเข้าด้วยกัน โดยใช้ Tailwind CSS ในการจัดสไตล์แบบ Utility-First เพื่อควบคุมดีไซน์มินิมอลได้อย่างละเอียด และใช้ Bootstrap Grid System ที่เสถียรในการจัดวางโครงสร้างหน้าเว็บ (Layout) ให้รองรับทุกขนาดหน้าจอ
+
+8.2 Backend
+
+เทคโนโลยีบทบาทในระบบNode.js (Express.js)ใช้พัฒนา RESTful API ที่เชื่อมต่อระหว่าง Frontend และฐานข้อมูล ด้วยจุดเด่นด้าน Non-blocking I/O ทำให้ประมวลผล Request จำนวนมากได้อย่างมีประสิทธิภาพ เหมาะกับระบบที่ต้องรองรับ Traffic สูง เช่น การค้นหาสินค้าและ Checkout
+
+8.3 Database
+
+เทคโนโลยีบทบาทในระบบMySQLฐานข้อมูลเชิงสัมพันธ์ (Relational Database) สำหรับจัดเก็บข้อมูลที่มีความสัมพันธ์ซับซ้อน เช่น สินค้าและตัวเลือกสต็อกแยกตามไซส์/สี, คำสั่งซื้อและรายการสินค้าในออเดอร์, รวมถึงระบบ Ticket ที่ต้องเชื่อมโยงกับผู้ใช้และคำสั่งซื้อ ความสามารถด้าน Transaction (ACID) ช่วยรับประกันความถูกต้องของข้อมูล เช่น การตัดสต็อกเมื่อชำระเงินสำเร็จ
+
+8.4 Authentication
+
+เทคโนโลยีบทบาทในระบบJWT (JSON Web Token)ใช้ออก Token เพื่อยืนยันตัวตนผู้ใช้งานหลังการ Login และกำหนดสิทธิ์การเข้าถึง (Authorization) ที่แตกต่างกันระหว่าง 3 บทบาท ได้แก่ Customer, Admin และ Support อย่างปลอดภัย โดยไม่ต้องเก็บ Session ฝั่ง Server
+
+8.5 Version Control & Development Tools
+
+เครื่องมือบทบาทในระบบGitHubใช้เป็นที่จัดเก็บ Source Code (Repository) หลักของโปรเจกต์ รองรับการทำงานร่วมกันของทีมผ่านระบบ Branch, Pull Request และ Code ReviewSourcetreeโปรแกรม Git GUI Client ที่ช่วยให้ทีมพัฒนาบริหารจัดการ Branch การทำงาน ตรวจสอบประวัติการ Commit ได้อย่างชัดเจนเป็นภาพ (Visualize) และช่วยลดข้อผิดพลาดที่อาจเกิดขึ้นระหว่างการ Merge โค้ด
 
 ---
 
