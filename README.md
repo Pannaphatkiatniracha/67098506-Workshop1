@@ -187,13 +187,7 @@
 
 ---
 
-graph TD
-    %% --- กำหนดรูปแบบสี (Styles) ---
-    classDef actor fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef frontend fill:#e3f2fd,stroke:#1565c0,stroke-width:1px;
-    classDef backend fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-    classDef db fill:#fff8e1,stroke:#f57f17,stroke-width:2px;
-
+## 10. Mermaid Diagram
     %% --- กลุ่มผู้ใช้งาน (Users) ---
     Customer[ Customer]:::actor
     Staff[ Staff]:::actor
