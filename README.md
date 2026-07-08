@@ -1,4 +1,4 @@
-# SALA STORE - E-Commerce 67098506 Pannaphat
+# SALA STORE E-Commerce 67098506 Pannaphat
 
 ##  สมาชิกในกลุ่ม (Team Members)
 * 67098506 - ปัณณพรรธน์ เกียรตินิรชา
