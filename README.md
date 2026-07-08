@@ -188,36 +188,38 @@
 ---
 
 ## 10. Mermaid Diagram
-    %% --- กลุ่มผู้ใช้งาน (Users) ---
-    Customer[ Customer]:::actor
-    Staff[ Staff]:::actor
-    Admin[ Admin]:::actor
+```mermaid
+graph TD
+%% --- กลุ่มผู้ใช้งาน (Users) ---
+Customer[ Customer]:::actor
+Staff[ Staff]:::actor
+Admin[ Admin]:::actor
 
-    %% --- ส่วนหน้าบ้าน (Frontend Interfaces) ---
-    Web[SALA Storefront]:::frontend
-    StaffWorkspace[Staff Workspace]:::frontend
-    AdminDash[Admin Dashboard]:::frontend
+%% --- ส่วนหน้าบ้าน (Frontend Interfaces) ---
+Web[SALA Storefront]:::frontend
+StaffWorkspace[Staff Workspace]:::frontend
+AdminDash[Admin Dashboard]:::frontend
 
-    %% --- ส่วนหลังบ้านและฐานข้อมูล (Backend & Database) ---
-    API(Backend: Node.js API Gateway):::backend
-    DB[(MySQL Database)]:::db
+%% --- ส่วนหลังบ้านและฐานข้อมูล (Backend & Database) ---
+API(Backend: Node.js API Gateway):::backend
+DB[(MySQL Database)]:::db
 
-    %% --- เส้นทางการทำงานของลูกค้า (Customer Path) ---
-    Customer -->|Log in / Search / Checkout| Web
-    Customer -->|Open Ticket / Track Order| Web
+%% --- เส้นทางการทำงานของลูกค้า (Customer Path) ---
+Customer -->|Log in / Search / Checkout| Web
+Customer -->|Open Ticket / Track Order| Web
 
-    %% --- เส้นทางการทำงานของพนักงาน (Staff Path) ---
-    Staff -->|Check Orders / Update Shipping| StaffWorkspace
-    Staff -->|Reply Tickets / View Basic Sales| StaffWorkspace
+%% --- เส้นทางการทำงานของพนักงาน (Staff Path) ---
+Staff -->|Check Orders / Update Shipping| StaffWorkspace
+Staff -->|Reply Tickets / View Basic Sales| StaffWorkspace
 
-    %% --- เส้นทางการทำงานของผู้ดูแลระบบ (Admin Path) ---
-    Admin -->|CRUD Products, Categories, Users| AdminDash
-    Admin -->|Assign Roles / Advanced Reports| AdminDash
+%% --- เส้นทางการทำงานของผู้ดูแลระบบ (Admin Path) ---
+Admin -->|CRUD Products, Categories, Users| AdminDash
+Admin -->|Assign Roles / Advanced Reports| AdminDash
 
-    %% --- การเชื่อมต่อ API (API & Data Flow) ---
-    Web -->|API Requests| API
-    StaffWorkspace -->|API Requests| API
-    AdminDash -->|API Requests| API
-    
-    API <-->|Read / Write / Update Data| DB
+%% --- การเชื่อมต่อ API (API & Data Flow) ---
+Web -->|API Requests| API
+StaffWorkspace -->|API Requests| API
+AdminDash -->|API Requests| API
+
+API <-->|Read / Write / Update Data| DB
 
