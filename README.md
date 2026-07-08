@@ -187,58 +187,43 @@
 
 ---
 
-flowchart TD
-    %% --- กำหนดรูปแบบ (Styles) ---
-    classDef startEnd fill:#d1c4e9,stroke:#512da8,stroke-width:2px,rx:20,ry:20;
-    classDef process fill:#bbdefb,stroke:#1976d2,stroke-width:1px;
-    classDef action fill:#c8e6c9,stroke:#388e3c,stroke-width:1px;
-    classDef decision fill:#e1bee7,stroke:#8e24aa,stroke-width:1px;
+graph TD
+    %% --- กำหนดรูปแบบสี (Styles) ---
+    classDef actor fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef frontend fill:#e3f2fd,stroke:#1565c0,stroke-width:1px;
+    classDef backend fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef db fill:#fff8e1,stroke:#f57f17,stroke-width:2px;
 
-    %% --- เริ่มต้น ---
-    Start([เริ่มต้น: ลูกค้าเยี่ยมชม SALA STORE]):::startEnd
-    
-    %% --- ค้นหาและเลือกสินค้า ---
-    Search[ค้นหาสินค้า]:::process
-    Filter[กรองสินค้า ไซส์, สี, ราคา]:::action
-    Display[แสดงรายการสินค้า]:::process
-    Detail[ดูรายละเอียดสินค้า]:::process
-    AddToCart[เลือกสินค้า ไซส์, สี -> เพิ่มลงตะกร้า]:::action
-    ViewCart[ดูกระกร้าสินค้า]:::process
-    
-    %% --- กระบวนการชำระเงิน ---
-    Checkout[เริ่มกระบวนการชำระเงิน]:::process
-    IsLogin{เข้าสู่ระบบแล้ว?}:::decision
-    Login[ลงทะเบียน / เข้าสู่ระบบ]:::process
-    Address[ยืนยันที่อยู่จัดส่ง]:::process
-    Payment[เลือกวิธีชำระเงิน <br>ช่องทาง: บัตรเครดิต, พร้อมเพย์, TrueMoney]:::action
-    ConfirmPay[ยืนยันการชำระเงิน]:::process
-    
-    %% --- สิ้นสุดกระบวนการ ---
-    Success([สั่งซื้อสำเร็จ <br>ส่งอีเมลแจ้งเตือนอัตโนมัติ]):::process
-    History[ดูประวัติสั่งซื้อ / ติดตามพัสดุ]:::process
-    End([จบ]):::startEnd
+    %% --- กลุ่มผู้ใช้งาน (Users) ---
+    Customer[ Customer]:::actor
+    Staff[ Staff]:::actor
+    Admin[ Admin]:::actor
 
-    %% --- ลำดับขั้นตอน (Flow) ---
-    Start --> Search
-    Search --> Filter
-    Search --> Display
-    Filter --> Display
-    Display --> Detail
-    Detail --> AddToCart
-    AddToCart --> ViewCart
-    ViewCart --> Checkout
-    Checkout --> IsLogin
-    
-    IsLogin -- ไม่ใช่ --> Login
-    Login --> Address
-    IsLogin -- ใช่ --> Address
-    
-    Address --> Payment
-    Payment --> ConfirmPay
-    ConfirmPay --> Success
-    
-    Success --> History
-    Success --> End
-    History --> End
+    %% --- ส่วนหน้าบ้าน (Frontend Interfaces) ---
+    Web[SALA Storefront]:::frontend
+    StaffWorkspace[Staff Workspace]:::frontend
+    AdminDash[Admin Dashboard]:::frontend
 
+    %% --- ส่วนหลังบ้านและฐานข้อมูล (Backend & Database) ---
+    API(Backend: Node.js API Gateway):::backend
+    DB[(MySQL Database)]:::db
+
+    %% --- เส้นทางการทำงานของลูกค้า (Customer Path) ---
+    Customer -->|Log in / Search / Checkout| Web
+    Customer -->|Open Ticket / Track Order| Web
+
+    %% --- เส้นทางการทำงานของพนักงาน (Staff Path) ---
+    Staff -->|Check Orders / Update Shipping| StaffWorkspace
+    Staff -->|Reply Tickets / View Basic Sales| StaffWorkspace
+
+    %% --- เส้นทางการทำงานของผู้ดูแลระบบ (Admin Path) ---
+    Admin -->|CRUD Products, Categories, Users| AdminDash
+    Admin -->|Assign Roles / Advanced Reports| AdminDash
+
+    %% --- การเชื่อมต่อ API (API & Data Flow) ---
+    Web -->|API Requests| API
+    StaffWorkspace -->|API Requests| API
+    AdminDash -->|API Requests| API
+    
+    API <-->|Read / Write / Update Data| DB
 
