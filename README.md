@@ -187,71 +187,62 @@
 
 ---
 
-```mermaid
-graph LR
-    %% --- Styles ---
-    classDef actor fill:#f9f,stroke:#333,stroke-width:2px,vertical-align:middle;
-    classDef usecase fill:#e1f5fe,stroke:#0288d1,stroke-width:1px;
-    classDef system fill:#fafafa,stroke:#999,stroke-width:2px,stroke-dasharray: 5 5;
+flowchart LR
+    %% --- สไตล์และนิยามองค์ประกอบ ---
+    classDef actor fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,rx:10,ry:10;
+    classDef core fill:#fafafa,stroke:#999,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef db fill:#ffecb3,stroke:#ff8f00,stroke-width:2px;
+    classDef ui fill:#ffffff,stroke:#333,stroke-width:1px;
 
-    %% --- Actors ---
-    Customer((🧑‍💻 ลูกค้า<br>Customer)):::actor
-    Staff((🧑‍💼 พนักงาน<br>Staff)):::actor
-    Admin((👑 ผู้ดูแลระบบ<br>Admin)):::actor
-
-    %% --- System Boundary ---
-    subgraph SALA_System [SALA E-Commerce System]
+    %% --- หัวข้อแผนภูมิ ---
+    subgraph TITLE [SALA STORE - การไหลของข้อมูลและความสัมพันธ์ระหว่างบทบาทผู้ใช้ (DATA FLOW & USER RELATIONSHIPS)]
         direction TB
+        NoNode[ ]:::TITLE
+    end
+    linkStyle 0 stroke:none;
 
-        %% Customer Use Cases
-        UC_Auth([สมัครสมาชิกและเข้าสู่ระบบ]):::usecase
-        UC_Browse([ค้นหาและดูรายละเอียดสินค้า]):::usecase
-        UC_Cart([เพิ่มสินค้าในตะกร้า]):::usecase
-        UC_Checkout([สั่งซื้อสินค้า]):::usecase
-        UC_Pay([ชำระเงิน]):::usecase
-        UC_Track([ติดตามสถานะคำสั่งซื้อ]):::usecase
-        UC_History([ดูประวัติการสั่งซื้อ]):::usecase
-        UC_SubmitTicket([ยื่น Ticket ขอความช่วยเหลือ]):::usecase
+    %% --- กลุ่มผู้ใช้ ---
+    Customer[ ลูกค้า<br>Customer Client]:::actor
+    Staff[ พนักงาน<br>Staff Portal]:::actor
+    Admin[ ผู้ดูแลระบบ<br>Admin Dashboard]:::actor
 
-        %% Staff Use Cases
-        UC_StaffOrder([ตรวจสอบคำสั่งซื้อของลูกค้า]):::usecase
-        UC_StaffShip([อัปเดตสถานะคำสั่งซื้อและการจัดส่ง]):::usecase
-        UC_StaffSales([ตรวจสอบข้อมูลการขายเบื้องต้น]):::usecase
-        UC_StaffTicket([ตอบ Ticket แก้ปัญหาให้ลูกค้า]):::usecase
-
-        %% Admin Use Cases
-        UC_AdminProduct([จัดการข้อมูลสินค้า เพิ่ม/แก้ไข/ลบ]):::usecase
-        UC_AdminOrder([จัดการคำสั่งซื้อภาพรวม]):::usecase
-        UC_AdminUser([จัดการข้อมูลผู้ใช้งาน]):::usecase
-        UC_AdminRole([กำหนดสิทธิ์การใช้งานระบบ]):::usecase
-        UC_AdminReport([ตรวจสอบรายงานการขายเชิงลึก]):::usecase
-
-        %% --- Includes / Extends Relationships ---
-        UC_Checkout -.->|&lt;&lt;include&gt;&gt;| UC_Auth
-        UC_Checkout -.->|&lt;&lt;include&gt;&gt;| UC_Pay
-        UC_AdminRole -.->|&lt;&lt;extend&gt;&gt;| UC_AdminUser
+    %% --- ระบบหลัก SALA ---
+    subgraph SALA_Store [SALA E-Commerce System - ระบบหลัก]
+        direction TB
+        
+        Main_Server([SALA Main Server])
+        
+        subgraph INTERNAL [กระบวนการภายใน]
+            direction LR
+            Product_Engine[Product Engine]
+            Order_Processor[Order Processor]
+            Payment_Gateway[Payment Gateway]
+            Ticket_Manager[Ticket Manager]
+        end
+        
+        Database[(MySQL Database)]:::db
+        
+        Main_Server <--> INTERNAL
+        INTERNAL <--> Database
+        Main_Server <--> Database
     end
 
-    %% --- Actor to Use Case Connections ---
+    %% --- การไหลของข้อมูลและความสัมพันธ์ ---
 
-    %% Customer Links
-    Customer --> UC_Auth
-    Customer --> UC_Browse
-    Customer --> UC_Cart
-    Customer --> UC_Checkout
-    Customer --> UC_Track
-    Customer --> UC_History
-    Customer --> UC_SubmitTicket
+    %% --- 1. ความสัมพันธ์เชิงบทบาทและการไหลของข้อมูล ---
+    Admin -->|กำหนดสิทธิ์/จัดการบัญชี| Staff
+    Admin -->|จัดการบัญชี| Customer
+    Customer <---|ยื่น Ticket ขอความช่วยเหลือ| Staff
+    Staff <---|ช่วยเหลือ/ตอบ Ticket| Customer
 
-    %% Staff Links
-    Staff --> UC_StaffOrder
-    Staff --> UC_StaffShip
-    Staff --> UC_StaffSales
-    Staff --> UC_StaffTicket
+    %% --- 2. ลูกค้า <-> ระบบ ---
+    Customer -->|ค้นหาสินค้า, ส่งคำสั่งซื้อ, ข้อมูลโปรไฟล์,<br>การจ่ายเงิน, Ticket| Main_Server
+    Main_Server -->|ข้อมูลสินค้า, สถานะจัดส่ง, ประวัติ,<br>คำตอบ Ticket| Customer
 
-    %% Admin Links
-    Admin --> UC_AdminProduct
-    Admin --> UC_AdminOrder
-    Admin --> UC_AdminUser
-    Admin --> UC_AdminReport
+    %% --- 3. พนักงาน <-> ระบบ ---
+    Staff -->|อัปเดตสถานะจัดส่ง, ตอบ Ticket,<br>ดูยอดขายเบื้องต้น| Main_Server
+    Main_Server -->|รายการออเดอร์, รายการ Ticket,<br>ข้อมูลสินค้าเบื้องต้น| Staff
 
+    %% --- 4. ผู้ดูแลระบบ <-> ระบบ ---
+    Admin -->|CRUD สินค้า, หมวดหมู่, ผู้ใช้, สิทธิ์| Main_Server
+    Main_Server -->|รายงานยอดขายเชิงลึก, สถิติ,<br>รายชื่อผู้ใช้ทั้งหมด| Admin
