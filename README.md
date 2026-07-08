@@ -19,7 +19,7 @@
 7. [ความต้องการของระบบ (System Requirements)](#7-ความต้องการของระบบ-system-requirements)
 8. [เทคโนโลยีที่ใช้พัฒนา (Technology Stack)](#8-เทคโนโลยีที่ใช้พัฒนา-technology-stack)
 9. [โครงสร้างฐานข้อมูล (Database Design)](#9-โครงสร้างฐานข้อมูล-database-design)
-
+10. [Mermaid Diagram](#10-mermaid-diagram)
 
 ---
 
