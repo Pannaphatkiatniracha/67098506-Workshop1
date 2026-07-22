@@ -185,6 +185,9 @@
 * `tickets` - คำร้องหรือปัญหาที่ส่งเข้ามา (เชื่อมโยงผูกกับ User ID และ Order ID)
 * `ticket_messages` - กล่องข้อความบันทึกการสนทนาระหว่าง Customer และ Staff ในแต่ละ Ticket
 
+
+
+canva https://canva.link/hbdufg4lbnevymy
 ---
 
 ## 10. Mermaid Diagram
