@@ -19,7 +19,8 @@
 7. [ความต้องการของระบบ (System Requirements)](#7-ความต้องการของระบบ-system-requirements)
 8. [เทคโนโลยีที่ใช้พัฒนา (Technology Stack)](#8-เทคโนโลยีที่ใช้พัฒนา-technology-stack)
 9. [โครงสร้างฐานข้อมูล (Database Design)](#9-โครงสร้างฐานข้อมูล-database-design)
-10. [Mermaid Diagram](#10-mermaid-diagram)
+10. [ระบบต้นแบบ (Prototype)](#10-ระบบต้นแบบ-prototype)
+11. [Mermaid Diagram](#10-mermaid-diagram)
 
 ---
 
@@ -202,8 +203,11 @@
 * `ticket_messages` - กล่องข้อความบันทึกการสนทนาระหว่าง Customer และ Staff ในแต่ละ Ticket
 
 ---
+## 10. ระบบต้นแบบ (Prototype)
+* **Link Prototype:** สามารถเข้าชมและร่วมทดสอบระบบต้นแบบของร้าน SALA STORE ได้ที่ [SALA STORE Figma Prototype](https://www.figma.com/design/8SYpgjQJaHrKjdKS1LM6Lf/SALA-STORE?node-id=0-1&t=rpCVc7eXAXsNcU6Q-1
+---
 
-## 10. Mermaid Diagram
+## 11. Mermaid Diagram
 ```mermaid
 graph TD
 %% --- กลุ่มผู้ใช้งาน (Users) ---
@@ -238,6 +242,5 @@ StaffWorkspace -->|API Requests| API
 AdminDash -->|API Requests| API
 
 API <-->|Read / Write / Update Data| DB
-
 
 
