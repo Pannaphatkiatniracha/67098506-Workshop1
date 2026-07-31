@@ -238,4 +238,10 @@ StaffWorkspace -->|API Requests| API
 AdminDash -->|API Requests| API
 
 API <-->|Read / Write / Update Data| DB
+---
+
+## 11. ระบบต้นแบบ (Prototype)
+* **Link Prototype:** สามารถเข้าชมและร่วมทดสอบระบบต้นแบบของร้าน SALA STORE ได้ที่ https://www.figma.com/design/8SYpgjQJaHrKjdKS1LM6Lf/SALA-STORE?node-id=0-1&t=rpCVc7eXAXsNcU6Q-1
+
+
 
